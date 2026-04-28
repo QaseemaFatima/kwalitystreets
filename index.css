@@ -103,6 +103,19 @@ body {
     object-fit: cover;
     opacity: 0;
     transition: opacity 0.1s ease-in-out;
+    pointer-events: none;
+}
+
+/* Aggressively hide native video controls on mobile (especially iOS/Safari) */
+video::-webkit-media-controls {
+    display: none !important;
+}
+video::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none !important;
 }
 
 .hero-video.active {
