@@ -64,8 +64,21 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         const menuContainer = document.getElementById('menu-categories-container');
         if (menuContainer) {
-            // Force the menu to remain forever by always using default data
-            let currentMenuData = window.defaultMenuData || {};
+            let currentMenuData = null;
+            try {
+                let storedData = localStorage.getItem('kwalityMenuData');
+                if (storedData) {
+                    const parsed = JSON.parse(storedData);
+                    if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+                        currentMenuData = parsed;
+                    }
+                }
+            } catch (e) {
+                console.warn("localStorage error", e);
+            }
+            if (!currentMenuData) {
+                currentMenuData = window.defaultMenuData || {};
+            }
 
             // 3. Render
             if (!currentMenuData || Object.keys(currentMenuData).length === 0) {
