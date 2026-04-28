@@ -120,7 +120,7 @@ video::-webkit-media-controls-start-playback-button {
     -webkit-appearance: none !important;
 }
 
-.hero-video.active {
+.hero-video.active.is-playing {
     opacity: 1;
 }
 

@@ -16,8 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                     // Preload the next video to ensure smooth transitions without stealing initial bandwidth
                     video.addEventListener('play', () => {
+                        video.classList.add('is-playing');
                         const nextIndex = (index + 1) % videoElements.length;
                         videoElements[nextIndex].preload = 'auto';
+                    });
+                    video.addEventListener('pause', () => {
+                        video.classList.remove('is-playing');
                     });
                 });
 
