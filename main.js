@@ -8,11 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (videoElements.length > 0) {
                 let currentIndex = 0;
 
-                videoElements.forEach((video) => {
+                videoElements.forEach((video, index) => {
                     video.addEventListener('ended', () => transitionToNextVideo());
                     video.addEventListener('error', (e) => {
                         console.warn('Video failed to load:', video.src, e);
                         transitionToNextVideo(); // skip to next if one fails
+                    });
+                    // Preload the next video to ensure smooth transitions without stealing initial bandwidth
+                    video.addEventListener('play', () => {
+                        const nextIndex = (index + 1) % videoElements.length;
+                        videoElements[nextIndex].preload = 'auto';
                     });
                 });
 

@@ -99,11 +99,13 @@ body {
     min-height: 100%;
     width: auto;
     height: auto;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) translateZ(0);
     object-fit: cover;
     opacity: 0;
     transition: opacity 0.1s ease-in-out;
     pointer-events: none;
+    will-change: opacity;
+    backface-visibility: hidden;
 }
 
 /* Aggressively hide native video controls on mobile (especially iOS/Safari) */
