@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Admin - Kwality Streets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ffffff;
+            --accent-color: #d4af37;
+            --bg-color: #000;
+            --panel-bg: #111;
+            --border-color: #333;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+        }
+
+        .admin-container {
+            display: flex;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 8px;
+            flex: 1;
+        }
+
+        .panel h2 {
+            font-family: var(--font-heading);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            border-bottom: 1px solid #222;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #ccc;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #000;
+            border: 1px solid var(--border-color);
+            color: #fff;
+            font-family: var(--font-body);
+            border-radius: 4px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        button {
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #e5c158;
+        }
+
+        /* List Styles */
+        .category-select {
+            margin-bottom: 1rem;
+        }
+
+        .item-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #000;
+            border: 1px solid var(--border-color);
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .list-item-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .list-item-name {
+            font-weight: 500;
+        }
+        
+        .list-item-price {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .delete-btn {
+            background-color: transparent;
+            color: #ff4444;
+            border: 1px solid #ff4444;
+            padding: 0.4rem 0.8rem;
+            width: auto;
+            font-size: 0.8rem;
+        }
+
+        .delete-btn:hover {
+            background-color: #ff4444;
+            color: #fff;
+        }
+
+        .success-msg {
+            color: #4BB543;
+            margin-top: 1rem;
+            text-align: center;
+            display: none;
+        }
+
+        .subtitle-item {
+            background-color: #1a1a1a;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-family: var(--font-heading);
+            padding: 0.5rem 1rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .admin-container {
+                flex-direction: column;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Menu Administration</h1>
+        <p>Add or remove items directly from the live menu.</p>
+        <div style="margin-top: 1rem;">
+            <a href="index.html" style="color: var(--accent-color); text-decoration: none;">&larr; Back to Website</a>
+        </div>
+    </div>
+
+    <div class="admin-container">
+        <!-- Add Item Panel -->
+        <div class="panel">
+            <h2>Add New Menu Item</h2>
+            <form id="add-form">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="item-category" required>
+                        <option value="appetizers">Appetizers</option>
+                        <option value="main-course">Main Course</option>
+                        <option value="breads-rice">Breads & Rice</option>
+                        <option value="fast-food">Fast Food</option>
+                        <option value="chinese">Chinese</option>
+                        <option value="south-indian">South Indian & Bites</option>
+                        <option value="desserts">Desserts</option>
+                        <option value="beverages">Beverages</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Item Name (or Subtitle)</label>
+                    <input type="text" id="item-name" placeholder="e.g. Garlic Naan" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Price (Leave blank if adding a Subtitle)</label>
+                    <input type="number" id="item-price" placeholder="e.g. 150">
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="checkbox" id="is-subtitle" style="width: auto;">
+                    <label style="margin: 0; text-transform: none;">This is a category subtitle (e.g. "Pizzas")</label>
+                </div>
+
+                <button type="submit">Add Item</button>
+                <div class="success-msg" id="success-msg">Item added successfully!</div>
+            </form>
+        </div>
+
+        <!-- Manage Items Panel -->
+        <div class="panel">
+            <h2>Manage Existing Items</h2>
+            <div class="form-group">
+                <select id="manage-category" class="category-select">
+                    <option value="appetizers">Appetizers</option>
+                    <option value="main-course">Main Course</option>
+                    <option value="breads-rice">Breads & Rice</option>
+                    <option value="fast-food">Fast Food</option>
+                    <option value="chinese">Chinese</option>
+                    <option value="south-indian">South Indian & Bites</option>
+                    <option value="desserts">Desserts</option>
+                    <option value="beverages">Beverages</option>
+                </select>
+            </div>
+            <div class="item-list" id="item-list">
+                <!-- JS Populated -->
+            </div>
+            
+            <div style="margin-top: 2rem;">
+                <button id="reset-db" style="background-color: transparent; border: 1px solid #666; color: #ccc;">Reset to Default Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Default Data and Admin Logic -->
+    <script src="menuData.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
