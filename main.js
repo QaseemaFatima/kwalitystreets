@@ -36,6 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     currentVideo.classList.remove('active');
                     nextVideo.classList.add('active');
+                    
+                    // Stop the old video from playing in the background to save massive battery and prevent lag
+                    setTimeout(() => currentVideo.pause(), 150);
                 }
                 
                 videoElements[0].play().catch(e => console.log("Initial autoplay was prevented by browser policies."));
