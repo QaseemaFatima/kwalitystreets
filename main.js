@@ -35,6 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 videoElements[0].play().catch(e => console.log("Initial autoplay was prevented by browser policies."));
+
+                // Fallback for strict mobile autoplay policies (e.g., iOS Low Power Mode)
+                const playOnInteract = () => {
+                    const activeVideo = videoElements.find(v => v.classList.contains('active')) || videoElements[0];
+                    if (activeVideo.paused) {
+                        activeVideo.play().catch(e => console.log("Autoplay still prevented on interact."));
+                    }
+                };
+                
+                document.body.addEventListener('touchstart', playOnInteract, { once: true });
+                document.body.addEventListener('click', playOnInteract, { once: true });
+                document.body.addEventListener('scroll', playOnInteract, { once: true });
             } else {
                 // Graceful fallback if no videos are configured
                 container.innerHTML = '<div style="background: #111; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #666;">Background Cinematic Mode Unavailable</div>';
